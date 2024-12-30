@@ -1,0 +1,4 @@
+db:
+  url: jdbc:postgresql://localhost:5432/dmdev-postgres
+  user: postgres
+  password: s9td3ixh

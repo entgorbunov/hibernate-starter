@@ -1,0 +1,19 @@
+services:
+  postgres-server:
+    container_name: my-postgres-server
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - /Users/ent/postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: s9td3ixh
+      POSTGRES_DB: dmdev-postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
