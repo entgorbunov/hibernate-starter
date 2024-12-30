@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -25,6 +26,7 @@ public class User {
     private String username;
     private String firstname;
     private String lastname;
+    @Column(name = "birth_date")
     private LocalDate birthDate;
     private Integer age;
 

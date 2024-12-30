@@ -32,6 +32,10 @@ public class HibernateRunner {
                 .build();
 
             session.save(user);
+//            session.flush();
+//
+//            User savedUser = session.get(User.class, user.getUsername());
+//            System.out.println(savedUser);
 
             session.getTransaction().commit();
         }
