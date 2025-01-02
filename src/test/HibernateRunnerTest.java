@@ -1,4 +1,3 @@
-
 import com.dmdevtraining.entity.User;
 import org.junit.jupiter.api.Test;
 
@@ -21,13 +20,13 @@ class HibernateRunnerTest {
             .build();
 
         String sql = """
-                insert
-                into
-                %s
-                (%s)
-                values
-                (%s)
-                """;
+            insert
+            into
+            %s
+            (%s)
+            values
+            (%s)
+            """;
         String tableName = ofNullable(user.getClass().getAnnotation(Table.class))
             .map(tableAnnotation -> tableAnnotation.schema() + "." + tableAnnotation.name())
             .orElse(user.getClass().getName());
@@ -53,14 +52,6 @@ class HibernateRunnerTest {
             preparedStatement.setObject(1, declaredField.get(user));
         }
     }
-
-
-
-
-
-
-
-
 
 
 }
