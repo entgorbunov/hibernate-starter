@@ -1,8 +1,8 @@
 package com.dmdevtraining;
 
-import com.dmdevtraining.converter.BirthDateConverter;
 import com.dmdevtraining.entity.Birthdate;
 import com.dmdevtraining.entity.User;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
@@ -21,6 +21,7 @@ public class HibernateRunner {
         configuration.addAnnotatedClass(User.class);
         configuration.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy());
 //        configuration.addAttributeConverter(new BirthDateConverter(), true);
+        configuration.registerTypeOverride(new JsonBinaryType());
 
         try (SessionFactory sessionFactory = configuration.buildSessionFactory();
              Session session = sessionFactory.openSession()) {
@@ -32,6 +33,12 @@ public class HibernateRunner {
                 .username("ivan@gmail.com")
                 .firstname("Ivan")
                 .lastname("Ivanov")
+                .info("""
+                      {
+                                "id": 25,
+                                "name": "Ivan"
+                            }
+                    """)
                 .birthDate(new Birthdate(LocalDate.of(2000, 1, 19)))
                 .role(ADMIN)
                 .build();

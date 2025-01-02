@@ -9,7 +9,7 @@ repositories {
     mavenCentral()
 }
 
-java{
+java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
@@ -17,7 +17,11 @@ java{
 dependencies {
 
     implementation 'org.hibernate:hibernate-core:5.5.6.Final'
-    runtimeOnly 'org.postgresql:postgresql:42.2.23'
+    runtimeOnly 'org.postgresql:postgresql:42.2.23.jre7'
+    implementation 'com.vladmihalcea:hibernate-types-52:2.12.1'
+    implementation 'org.slf4j:slf4j-api:2.0.16'
+
+
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
