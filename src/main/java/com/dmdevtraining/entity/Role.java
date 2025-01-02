@@ -9,6 +9,7 @@ public enum Role {
     ADMIN("Admin");
 
     final String name;
+
     Role(String name) {
         this.name = name;
     }

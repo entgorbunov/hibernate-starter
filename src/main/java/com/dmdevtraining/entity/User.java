@@ -1,7 +1,6 @@
 package com.dmdevtraining.entity;
 
 import com.dmdevtraining.converter.BirthDateConverter;
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +15,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDate;
 import java.util.Objects;
 
 @Getter

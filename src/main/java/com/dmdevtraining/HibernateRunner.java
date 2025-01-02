@@ -1,6 +1,5 @@
 package com.dmdevtraining;
 
-import com.dmdevtraining.entity.Birthdate;
 import com.dmdevtraining.entity.User;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import org.hibernate.Session;
@@ -9,9 +8,6 @@ import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
 import org.hibernate.cfg.Configuration;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-
-import static com.dmdevtraining.entity.Role.ADMIN;
 
 public class HibernateRunner {
     public static void main(String[] args) throws SQLException {
