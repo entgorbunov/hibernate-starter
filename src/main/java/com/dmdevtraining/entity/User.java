@@ -1,5 +1,6 @@
 package com.dmdevtraining.entity;
 
+import com.dmdevtraining.converter.BirthDateConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,7 +8,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
@@ -26,9 +30,12 @@ public class User {
     private String username;
     private String firstname;
     private String lastname;
+//    @Convert(converter = BirthDateConverter.class)
     @Column(name = "birth_date")
-    private LocalDate birthDate;
-    private Integer age;
+    private Birthdate birthDate;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
 
     @Override
     public String toString() {
@@ -37,18 +44,18 @@ public class User {
                ", firstname='" + firstname + '\'' +
                ", lastname='" + lastname + '\'' +
                ", birthDate=" + birthDate +
-               ", age=" + age +
+               ", role=" + role +
                '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof User user)) return false;
-        return Objects.equals(username, user.username) && Objects.equals(firstname, user.firstname) && Objects.equals(lastname, user.lastname) && Objects.equals(birthDate, user.birthDate) && Objects.equals(age, user.age);
+        return Objects.equals(username, user.username) && Objects.equals(firstname, user.firstname) && Objects.equals(lastname, user.lastname) && Objects.equals(birthDate, user.birthDate) && role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, firstname, lastname, birthDate, age);
+        return Objects.hash(username, firstname, lastname, birthDate, role);
     }
 }
