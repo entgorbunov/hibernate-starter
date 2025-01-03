@@ -1,5 +1,6 @@
 package com.dmdevtraining;
 
+import com.dmdevtraining.entity.PersonalInfo;
 import com.dmdevtraining.entity.User;
 import com.dmdevtraining.util.HibernateUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -13,9 +14,11 @@ import java.sql.SQLException;
 public class HibernateRunner {
     public static void main(String[] args) throws SQLException {
         User user = User.builder()
-            .username("ivan@gmail.com")
-            .firstname("Ivan")
-            .lastname("Ivanov")
+            .username("petr2@gmail.com")
+            .personalInfo(PersonalInfo.builder()
+                .firstname("Petr")
+                .lastname("Petrov")
+                .build())
             .build();
 
         log.info("User entity is in transient state, object {}", user);
