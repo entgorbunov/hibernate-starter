@@ -1,55 +1,37 @@
 package com.dmdevtraining;
 
 import com.dmdevtraining.entity.User;
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import com.dmdevtraining.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy;
-import org.hibernate.cfg.Configuration;
 
 import java.sql.SQLException;
 
 public class HibernateRunner {
     public static void main(String[] args) throws SQLException {
+        User user = User.builder()
+            .username("ivan@gmail.com")
+            .firstname("Ivan")
+            .lastname("Ivanov")
+            .build();
 
-        Configuration configuration = new Configuration();
-        configuration.configure();
-        configuration.addAnnotatedClass(User.class);
-        configuration.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy());
-//        configuration.addAttributeConverter(new BirthDateConverter(), true);
-        configuration.registerTypeOverride(new JsonBinaryType());
+        try (SessionFactory sessionFactory = HibernateUtil.buildSessionFactory()) {
+            try (Session session1 = sessionFactory.openSession()) {
 
-        try (SessionFactory sessionFactory = configuration.buildSessionFactory();
-             Session session = sessionFactory.openSession()) {
-            System.out.println("Ok");
+                session1.beginTransaction();
 
-            session.beginTransaction();
+                session1.saveOrUpdate(user);
 
-//            User user = User.builder()
-//                .username("ivan9@gmail.com")
-//                .firstname("Ivan")
-//                .lastname("Ivanov")
-//                .info("""
-//                      {
-//                                "id": 25,
-//                                "name": "Ivan"
-//                            }
-//                    """)
-//                .birthDate(new Birthdate(LocalDate.of(2000, 1, 19)))
-//                .role(ADMIN)
-//                .build();
+                session1.getTransaction().commit();
+            }
 
-//            session.delete(user);
-//
-            User user = session.get(User.class, "ivan9@gmail.com");
-            System.out.println(user);
+            try (Session session2 = sessionFactory.openSession()) {
 
-//            session.evict(user);
-//            session.clear();
-//            session.close();
+                session2.beginTransaction();
 
-            session.getTransaction().commit();
+                session2.getTransaction().commit();
+            }
+
         }
-
     }
 }
