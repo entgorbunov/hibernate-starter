@@ -1,6 +1,7 @@
 package com.dmdevtraining.util;
 
 import com.dmdevtraining.converter.BirthDateConverter;
+import com.dmdevtraining.entity.Company;
 import com.dmdevtraining.entity.User;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.experimental.UtilityClass;
@@ -16,6 +17,7 @@ public class HibernateUtil {
         Configuration configuration = new Configuration();
         configuration.setPhysicalNamingStrategy(new CamelCaseToUnderscoresNamingStrategy());
         configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Company.class);
         configuration.addAttributeConverter(new BirthDateConverter(), true);
         configuration.registerTypeOverride(new JsonBinaryType());
         configuration.configure();

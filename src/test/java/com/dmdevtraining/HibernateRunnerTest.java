@@ -9,7 +9,6 @@ import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Arrays;
 
 import static java.util.Optional.ofNullable;
@@ -21,10 +20,10 @@ class HibernateRunnerTest {
     void checkReflectionApi() throws SQLException, IllegalAccessException {
         User user = User.builder()
             .username("ivan@gmail.com")
-            .firstname("Ivan")
-            .lastname("Ivanov")
-            .birthDate(LocalDate.of(2000, 1, 19))
-            .age(20)
+//            .firstname("Ivan")
+//            .lastname("Ivanov")
+//            .birthDate(LocalDate.of(2000, 1, 19))
+//            .age(20)
             .build();
 
         String sql = """
