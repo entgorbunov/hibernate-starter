@@ -1,5 +1,6 @@
 package com.dmdevtraining;
 
+import com.dmdevtraining.entity.Company;
 import com.dmdevtraining.entity.PersonalInfo;
 import com.dmdevtraining.entity.User;
 import com.dmdevtraining.util.HibernateUtil;
@@ -13,34 +14,32 @@ import java.sql.SQLException;
 @Slf4j
 public class HibernateRunner {
     public static void main(String[] args) throws SQLException {
+        Company google = Company.builder()
+            .name("Google")
+            .build();
         User user = User.builder()
             .username("petr2@gmail.com")
             .personalInfo(PersonalInfo.builder()
                 .firstname("Petr")
                 .lastname("Petrov")
                 .build())
+            .company(google)
             .build();
 
-        log.info("User entity is in transient state, object {}", user);
 
         try (SessionFactory sessionFactory = HibernateUtil.buildSessionFactory()) {
             Session session1 = sessionFactory.openSession();
             try (session1) {
 
                 Transaction transaction = session1.beginTransaction();
-                log.trace("Transaction is created, {}", transaction);
 
-                session1.saveOrUpdate(user);
-                log.trace("User is in persistent state: {}, session {}", user, session1);
+                session1.save(google);
+                session1.save(user);
 
                 session1.getTransaction().commit();
             }
 
-            log.warn("User is in detached state: {}, session is closed {}", user, session1);
 
-        } catch (Exception e) {
-            log.error("Exception occurred", e);
-            throw e;
         }
     }
 }
